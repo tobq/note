@@ -1,0 +1,20 @@
+{
+  "name": "note",
+  "version": "1.0.0",
+  "description": "revision notes",
+  "main": "app.mjs",
+  "scripts": {
+    "start": "node --experimental-modules app.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobq/note.git"
+  },
+  "author": "Tobi Akinyemi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tobq/note/issues"
+  },
+  "homepage": "https://github.com/tobq/note#readme"
+}
