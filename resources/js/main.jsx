@@ -15,7 +15,7 @@ document.addEventListener("scroll", event => {
 });
 
 let ref = React.createRef();
-ReactDOM.render(<SectionBuilder ref={ref} JSON={{
+ReactDOM.render(<SectionBuilder ref={ref} defaultValue={{
     type: "section",
     title: "TOP",
     sections: [
