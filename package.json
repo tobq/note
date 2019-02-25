@@ -5,6 +5,8 @@
   "main": "app.mjs",
   "scripts": {
     "start": "node --experimental-modules app.mjs",
+    "build": "webpack -p",
+    "watch": "webpack -d --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +18,30 @@
   "bugs": {
     "url": "https://github.com/tobq/note/issues"
   },
-  "homepage": "https://github.com/tobq/note#readme"
+  "homepage": "https://github.com/tobq/note#readme",
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.0-beta.6",
+    "colors": "^1.2.1",
+    "css-loader": "^2.1.0",
+    "eslint": "^4.19.1",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-react": "^7.7.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "node-sass": "^4.11.0",
+    "npm": "^6.8.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "uglify-js": "^3.3.18",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
+  }
 }
