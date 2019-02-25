@@ -1,0 +1,70 @@
+$line-height: 20px;
+$border-size: $line-height;
+$border-radius: 0; //$border-size / 2;
+$border-spacing-vertical: 4px;
+$border-colour: rgba(black, 0.1);
+$hover-colour: rgba(black, 0.2);
+$border-spacing-horizontal: $border-spacing-vertical * 2;
+
+.section-title {
+  padding: $border-spacing-vertical 0;
+}
+
+.definition-title, .section-title {
+  font-family: rbold;
+}
+
+.definition-title {
+  background-color: $border-colour;
+  padding: 1px 6px;
+  display: inline-block;
+  margin-right: $border-spacing-horizontal;
+  flex: 0 0;
+}
+
+.definition:hover > .definition-title {
+  background-color: $hover-colour;
+}
+
+.section {
+  //padding: 6px 10px;
+  //&:hover {
+  //  box-shadow: 0 0 5px black;
+  //}
+  display: flex;
+  //align-content: stretch;
+  line-height: $line-height;
+
+  &:not(:last-child) {
+    padding-bottom: $border-spacing-vertical;
+  }
+
+  &:not(:first-child) {
+    padding-top: $border-spacing-vertical;
+  }
+
+  &:not(.definition) {
+    &:before {
+      content: "";
+      //height: 2px;
+      background-color: $border-colour;
+      flex: 0 0 $border-size;
+      text-align: center;
+      margin-right: $border-spacing-horizontal;
+      border-radius: $border-radius;
+    }
+
+    &:hover:before {
+      background-color: $hover-colour;
+    }
+
+    &.point:before {
+      margin-top: ($line-height - $border-size) / 2;
+      //height: $border-size;
+    }
+  }
+}
+
+.definition-body, .section-body {
+  flex: 1 1;
+}
