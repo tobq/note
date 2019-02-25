@@ -18,6 +18,11 @@ export default class Section extends React.Component {
         }
     }
 
+    save(){
+        new Blob([this.value], {type: "application/json"});
+        var url  = URL.createObjectURL(blob)
+    }
+
     render() {
         return <div className="section">
             <div className="section-body">
