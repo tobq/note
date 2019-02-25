@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Section.scss"
 import Point from "./Point";
-import DefinitionTitle from "./DefinitionTitle";
 
 export default class Definition extends Point {
     static propTypes = {
@@ -15,15 +14,16 @@ export default class Definition extends Point {
     get value() {
         return {
             type: "definition",
-            title: this.title.current.value,
+            title: this.title.current.textContent,
             value: this.props.children
-        }
+        };
     }
 
     render() {
         return <div className="section point definition">
-            <DefinitionTitle ref={this.title}>{this.props.title}</DefinitionTitle>
+            <div className="definition-title" contentEditable tabIndex={0} ref={this.title}>{this.props.title}</div>
             <div className="definition-body">{this.props.children}</div>
         </div>;
+
     }
 }

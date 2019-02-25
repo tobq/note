@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "../sass/main.scss";
 import Section from "./components/Section/Section";
-import Point from "./components/Section/Point";
 import Definition from "./components/Section/Definition";
 import SectionBuilder from "./components/SectionBuilder";
 

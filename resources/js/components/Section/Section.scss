@@ -5,6 +5,7 @@ $border-spacing-vertical: 4px;
 $border-colour: rgba(black, 0.1);
 $hover-colour: rgba(black, 0.2);
 $border-spacing-horizontal: $border-spacing-vertical * 2;
+$font-size: 16px;
 
 .section-title {
   padding: $border-spacing-vertical 0;
@@ -31,6 +32,7 @@ $border-spacing-horizontal: $border-spacing-vertical * 2;
   //&:hover {
   //  box-shadow: 0 0 5px black;
   //}
+  font-size: $font-size;
   display: flex;
   //align-content: stretch;
   line-height: $line-height;
@@ -67,4 +69,17 @@ $border-spacing-horizontal: $border-spacing-vertical * 2;
 
 .definition-body, .section-body {
   flex: 1 1;
+}
+
+.editable-field {
+  border: none;
+  outline: none;
+  background: #8dcdff;
+  height: $line-height;
+  font-size: $font-size;
+  //padding: ;
+  width: 100%;
+  min-width: 200px;
+  box-sizing: border-box;
+  font-family: roboto;
 }

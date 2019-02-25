@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Editable from "./Editable";
 
-export default class SectionTitle extends Editable {
+export default class SectionTitle extends React.Component {
     static propTypes = {
         children: PropTypes.string.isRequired
     };

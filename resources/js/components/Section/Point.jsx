@@ -1,26 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Editable from "./Editable";
 
-export default class Point extends Editable {
+export default class Point extends React.Component {
     static propTypes = {
         children: PropTypes.string.isRequired,
     };
 
+    text = React.createRef();
+
     get value() {
         return {
             type: "point",
-            value: this.state.value
-        }
+            value: this.text.current.textContent
+        };
     }
 
     render() {
-        return this.state.edit ?
-            <div className="point section">
-                {this.getInput()}
-            </div> :
-            <div className="point section">
-                <div className="section-body" tabIndex={0} onFocus={e => this.edit()}>{this.state.value}</div>
-            </div>
+        return <div className="point section">
+            <div className="section-body" tabIndex={0} contentEditable ref={this.text}>{this.props.children}</div>
+        </div>
     }
 }
