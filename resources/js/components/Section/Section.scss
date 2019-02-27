@@ -1,85 +1,100 @@
 $line-height: 20px;
 $border-size: $line-height;
 $border-radius: 0; //$border-size / 2;
-$border-spacing-vertical: 4px;
+$border-spacing: 4px;
 $border-colour: rgba(black, 0.1);
 $hover-colour: rgba(black, 0.2);
-$border-spacing-horizontal: $border-spacing-vertical * 2;
 $font-size: 16px;
 
-.section-title {
-  padding: $border-spacing-vertical 0;
+%ellipses {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.definition-title, .section-title {
+%hover {
+  transition: background-color 0.2s ease;
+  background-color: $border-colour;
+
+  &:hover {
+    background-color: $hover-colour;
+  }
+}
+
+%node {
+  @extend %hover;
+  //@extend %ellipses;
+  padding: 1px 6px;
+}
+
+.section-title {
+  padding-top: $border-spacing;
+  padding-bottom: $border-spacing;
+}
+
+%node, .section-title {
   font-family: rbold;
 }
 
 .definition-title {
-  background-color: $border-colour;
-  padding: 1px 6px;
-  display: inline-block;
-  margin-right: $border-spacing-horizontal;
-  flex: 0 0;
+  @extend %node;
+  max-width: 50%;
 }
 
 .definition:hover > .definition-title {
   background-color: $hover-colour;
 }
 
-.section {
-  //padding: 6px 10px;
-  //&:hover {
-  //  box-shadow: 0 0 5px black;
-  //}
+.section, .point, .definition {
   font-size: $font-size;
-  display: flex;
-  //align-content: stretch;
   line-height: $line-height;
+  display: flex;
+}
 
-  &:not(:last-child) {
-    padding-bottom: $border-spacing-vertical;
+.section, .point {
+  &:before {
+    @extend %hover;
+    content: "";
+    //height: 2px;
+    background-color: $border-colour;
+    flex: 0 0 $border-size;
+    text-align: center;
+    border-radius: $border-radius;
   }
 
-  &:not(:first-child) {
-    padding-top: $border-spacing-vertical;
-  }
-
-  &:not(.definition) {
-    &:before {
-      content: "";
-      //height: 2px;
-      background-color: $border-colour;
-      flex: 0 0 $border-size;
-      text-align: center;
-      margin-right: $border-spacing-horizontal;
-      border-radius: $border-radius;
-    }
-
-    &:hover:before {
-      background-color: $hover-colour;
-    }
-
-    &.point:before {
-      margin-top: ($line-height - $border-size) / 2;
-      //height: $border-size;
-    }
+  &:hover:before {
+    background-color: $hover-colour;
   }
 }
 
-.definition-body, .section-body {
+.definition-body, .point-body, .section-body {
   flex: 1 1;
 }
 
-.editable-field {
-  border: none;
-  outline: none;
-  background: #8dcdff;
-  height: $line-height;
-  font-size: $font-size;
-  //padding: ;
-  width: 100%;
-  min-width: 200px;
-  box-sizing: border-box;
-  font-family: roboto;
+.definition, .point {
+  padding-left: $border-spacing;
 }
+
+.definition, .point, .section {
+  &:not(:last-child) {
+    margin-bottom: $border-spacing;
+  }
+}
+
+.definition-body, .point-body, .section-title {
+  padding-left: $border-spacing;
+}
+
+//
+//.editable-field {
+//  border: none;
+//  outline: none;
+//  background: #8dcdff;
+//  height: $line-height;
+//  font-size: $font-size;
+//  //padding: ;
+//  width: 100%;
+//  min-width: 200px;
+//  box-sizing: border-box;
+//  font-family: roboto;
+//}
