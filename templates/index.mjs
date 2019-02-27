@@ -12,6 +12,7 @@ export default (req, opts) => `
 </head>
 
 <body>
+<section id="body-content"></section>
 <header>Revise</header>
     <div id="nav-con"><nav>
     <div id="user-picture"></div>
