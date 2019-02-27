@@ -6,7 +6,8 @@ import Definition from "./Section/Definition";
 
 export default class SectionBuilder extends React.Component {
     static propTypes = {
-        defaultValue: PropTypes.object.isRequired
+        defaultValue: PropTypes.object.isRequired,
+        onCreate: PropTypes.func.isRequired,
     };
 
     ref = React.createRef();
@@ -19,12 +20,10 @@ export default class SectionBuilder extends React.Component {
         let json = this.props.defaultValue;
         switch (json.type) {
             case "point":
-                return <Point ref={this.ref}>{json.value}</Point>;
+                return <Point ref={this.ref} onCreate={this.props.onCreate}>{json.value}</Point>;
             case "section":
                 return <Section ref={this.ref} title={json.title}>
-                    {json.sections.map(section =>
-                        <SectionBuilder ref={React.createRef()} key={JSON.stringify(section)} defaultValue={section}/>
-                    )}
+                    {json.sections}
                 </Section>;
             case "definition":
                 return <Definition ref={this.ref} title={json.title}>{json.value}</Definition>;
