@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Point from "./Section/Point";
-import Section from "./Section/Section";
-import Definition from "./Section/Definition";
+import Point from "./Point";
+import Section from "./Section";
+import Definition from "./Definition";
 
 export default class SectionBuilder extends React.Component {
     static propTypes = {

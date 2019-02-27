@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "../sass/main.scss";
 import Section from "./components/Section/Section";
 import Definition from "./components/Section/Definition";
-import SectionBuilder from "./components/SectionBuilder";
+import SectionBuilder from "./components/Section/SectionBuilder";
 
 const nav = document.querySelector("nav");
 const header = document.querySelector("header");

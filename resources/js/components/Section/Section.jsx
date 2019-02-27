@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Section.scss"
+import SectionBuilder from "./SectionBuilder";
 
 export default class Section extends React.Component {
     static propTypes = {
