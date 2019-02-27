@@ -35,8 +35,8 @@ ReactDOM.render(<SectionBuilder ref={ref} defaultValue={{
         {type: "point", value: "Second Point"},
         {type: "point", value: "Another Point"},
     ]
-}}/>, document.body);
-console.log(ref.current.value)
+}}/>, document.getElementById("body-content"));
+console.log(ref.current.value);
 
 //
 //
