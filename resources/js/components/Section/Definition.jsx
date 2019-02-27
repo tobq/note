@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Section.scss"
-import Point from "./Point";
 
-export default class Definition extends Point {
+export default class Definition extends React.Component {
     static propTypes = {
         title: PropTypes.string.isRequired,
         children: PropTypes.string.isRequired,
+        onCreate: PropTypes.func.isRequired,
+        onRemove: PropTypes.func.isRequired,
     };
 
     title = React.createRef();
