@@ -22,6 +22,11 @@ export default class Section extends React.Component {
     save(){
         new Blob([this.value], {type: "application/json"});
         var url  = URL.createObjectURL(blob)
+    onKeyDown(e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            this.createLast();
+        }
     }
 
     render() {
