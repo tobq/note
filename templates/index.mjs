@@ -8,11 +8,10 @@ export default (req, opts) => `
     <meta name="author" content="Tobi Akinyemi">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/main.css" rel="stylesheet">
 </head>
 
 <body>
-<section id="body-content"></section>
+<Section id="body-content"></section>
 <header>Revise</header>
     <div id="nav-con"><nav>
     <div id="user-picture"></div>
