@@ -27,12 +27,12 @@ $font-size: 16px;
   padding: 1px 6px;
 }
 
-.section-title {
+.note-title {
   padding-top: $border-spacing;
   padding-bottom: $border-spacing;
 }
 
-%node, .section-title {
+%node, .note-title {
   font-family: rbold;
 }
 
@@ -45,13 +45,13 @@ $font-size: 16px;
   background-color: $hover-colour;
 }
 
-.section, .point, .definition {
+.note, .point, .definition {
   font-size: $font-size;
   line-height: $line-height;
   display: flex;
 }
 
-.section, .point {
+.note, .point {
   &:before {
     @extend %hover;
     content: "";
@@ -67,7 +67,7 @@ $font-size: 16px;
   }
 }
 
-.definition-body, .point-body, .section-body {
+.definition-body, .point-body, .note-body {
   flex: 1 1;
 }
 
@@ -75,13 +75,13 @@ $font-size: 16px;
   padding-left: $border-spacing;
 }
 
-.definition, .point, .section {
+.definition, .point, .note {
   &:not(:last-child) {
     margin-bottom: $border-spacing;
   }
 }
 
-.definition-body, .point-body, .section-title {
+.definition-body, .point-body, .note-title {
   padding-left: $border-spacing;
 }
 
