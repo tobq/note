@@ -1,18 +1,13 @@
-import {ComponentTypes, Definition, Note, Point} from "../Note";
-import {string} from "prop-types";
+import {Component, Definition, Note, Point} from "../Note";
+import {SerialisedComponent} from "../Note/Serial";
 
-type serial = {
-    type: ComponentTypes
-    title?: string;
-    body?: string | serial;
-};
-export default function parseJSON(json: serial) {
+export default function parseJSON(json: SerialisedComponent): Component {
     switch (json.type) {
-        case Point.TYPE:
+        case "point":
             return new Point(json.body);
-        case Note.TYPE:
+        case "note":
             return new Note(json.title, json.body.map(parseJSON));
-        case Definition.TYPE:
+        case "definition":
             return new Definition(json.title, json.body);
     }
 }
