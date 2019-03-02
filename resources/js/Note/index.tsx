@@ -299,7 +299,7 @@ class NoteView extends ComponentView<NoteProps, NoteState> {
             const children = this.state.children;
             let subView = this.getElement(newChild);
             if (child) {
-                const index = children.map(rf => rf.ref.current).indexOf(child);
+                const index = children.map(rf => rf.ref.current).indexOf(child) + 1;
                 this.setState({
                     children: [
                         ...children.slice(0, index),
