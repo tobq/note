@@ -14,7 +14,7 @@ const config = {
         rules: [
             {
                 resolve: {extensions: ['.tsx', '.ts', '.js']},
-                test: /\.[jt]sx?$/,
+                test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/
             },
