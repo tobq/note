@@ -6,9 +6,9 @@ import {SerialisedComponent, SerialisedDefinition, SerialisedNote, SerialisedPoi
 type RefView = { ref: React.RefObject<ComponentView>, view: JSX.Element };
 
 export abstract class Component {
-    body: any;
+    public body: any;
     // }
-    protected key = Math.random();
+    protected readonly key = Math.random();
 
     // protected get key(): string {
     //     return null; //JSON.stringify(this.value);
@@ -70,7 +70,6 @@ interface DefinitionProps extends ViewProps {
 
 export class Point extends Component {
     readonly body: string;
-
 
     constructor(body: string) {
         super();
