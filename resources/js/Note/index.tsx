@@ -8,7 +8,6 @@ type RefView = { ref: React.RefObject<ComponentView>, view: JSX.Element };
 export abstract class Component {
     body: any;
 
-    abstract get value(): any;
 
     protected get key(): string {
         return null; //JSON.stringify(this.value);
