@@ -94,7 +94,7 @@ export class Point extends Component {
         return {
             ref: ref,
             view: <PointView
-                key={JSON.stringify(this.value)}
+                key={this.key}
                 add={add}
                 remove={remove}
                 ref={ref}
