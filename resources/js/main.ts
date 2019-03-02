@@ -1,12 +1,14 @@
 import "../sass/main.scss";
 import parseJSON from "./util/parseJSON";
 import * as ReactDOM from "react-dom";
+import {SerialisedComponent} from "./Note/Serial";
 
 const nav = document.querySelector("nav");
 const header = document.querySelector("header");
 const NAV_STICK_CLASSNAME = "stick";
 const bodyContent = document.getElementById("body-content");
-const defaultConfig = {
+
+const defaultConfig: SerialisedComponent = {
     type: "note",
     title: "TOP",
     body: [
@@ -29,9 +31,9 @@ const defaultConfig = {
     ]
 };
 const note = parseJSON(defaultConfig);
-const noteComponent = note.getElement();
+const noteComponent = note.getElement(null, null);
 
-ReactDOM.render(noteComponent, bodyContent);
+ReactDOM.render(noteComponent.view, bodyContent);
 
 window.addEventListener("keydown", e => {
     if (e.keyCode === 27) console.log(noteComponent.ref.current.value);
