@@ -1,7 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import "../sass/main.scss";
 import parseJSON from "./util/parseJSON";
+import * as ReactDOM from "react-dom";
 
 const nav = document.querySelector("nav");
 const header = document.querySelector("header");
@@ -33,11 +32,12 @@ const note = parseJSON(defaultConfig);
 const noteComponent = note.getElement();
 
 ReactDOM.render(noteComponent, bodyContent);
+
 window.addEventListener("keydown", e => {
     if (e.keyCode === 27) console.log(noteComponent.ref.current.value);
 });
 
-document.addEventListener("scroll", event => {
+document.addEventListener("scroll", e => {
     if (header.getBoundingClientRect().bottom < 0) nav.classList.add(NAV_STICK_CLASSNAME);
     else nav.classList.remove(NAV_STICK_CLASSNAME)
 });
