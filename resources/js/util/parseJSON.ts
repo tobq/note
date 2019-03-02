@@ -1,4 +1,4 @@
-import {Definition, Note, Point} from "../Note/Index";
+import {Definition, Note, Point} from "../Note/Index.tsx";
 
 export default function parseJSON(json) {
     switch (json.type) {
