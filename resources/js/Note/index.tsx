@@ -7,11 +7,12 @@ type RefView = { ref: React.RefObject<ComponentView>, view: JSX.Element };
 
 export abstract class Component {
     body: any;
+    // }
+    protected key = Math.random();
 
+    // protected get key(): string {
+    //     return null; //JSON.stringify(this.value);
 
-    protected get key(): string {
-        return null; //JSON.stringify(this.value);
-    }
     abstract get value(): SerialisedComponent;
 
     abstract getElement(add: addCallback, remove: removeCallback): RefView;
