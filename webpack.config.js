@@ -13,23 +13,10 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
-                resolve: {extensions: [".js", ".jsx"]},
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: [
-                            ["@babel/preset-env", {targets: {esmodules: true}}],
-                            "@babel/react"
-                        ],
-                        plugins: [
-                            // "@babel/plugin-transform-regenerator",
-                            "@babel/plugin-syntax-dynamic-import",
-                            "@babel/plugin-proposal-class-properties",
-                        ]
-                    }
-                }
+                resolve: {extensions: ['.tsx', '.ts', '.js']},
+                test: /\.[jt]sx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
             },
             {
                 test: /\.s?css$/,

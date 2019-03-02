@@ -1,6 +1,4 @@
-import Note from "../Note/Note";
-import Point from "../Note/Point";
-import Definition from "../Note/Definition";
+import {Definition, Note, Point} from "../Note/Index";
 
 export default function parseJSON(json) {
     switch (json.type) {

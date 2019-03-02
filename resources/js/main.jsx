@@ -30,7 +30,7 @@ const defaultConfig = {
     ]
 };
 const note = parseJSON(defaultConfig);
-const noteComponent = note.getComponent();
+const noteComponent = note.getElement();
 
 ReactDOM.render(noteComponent, bodyContent);
 window.addEventListener("keydown", e => {
