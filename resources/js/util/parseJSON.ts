@@ -1,6 +1,12 @@
-import {Definition, Note, Point} from "../Note/Index.tsx";
+import {ComponentTypes, Definition, Note, Point} from "../Note";
+import {string} from "prop-types";
 
-export default function parseJSON(json) {
+type serial = {
+    type: ComponentTypes
+    title?: string;
+    body?: string | serial;
+};
+export default function parseJSON(json: serial) {
     switch (json.type) {
         case Point.TYPE:
             return new Point(json.body);

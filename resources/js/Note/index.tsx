@@ -30,8 +30,14 @@ export abstract class ComponentView<T extends ViewProps = ViewProps, S = {}> ext
     abstract focus(): void
 }
 
+export enum ComponentTypes {
+    Definition = "definition",
+    Point = "point",
+    Note = "note"
+}
+
 export class Definition extends Component {
-    static TYPE = "definition";
+    static TYPE = ComponentTypes.Definition;
     readonly title: string;
 
     constructor(title: string, body: string) {
@@ -69,7 +75,7 @@ interface DefinitionProps extends ViewProps {
 }
 
 export class Point extends Component {
-    static TYPE = "point";
+    static TYPE = ComponentTypes.Point;
     readonly body: string;
 
 
@@ -234,7 +240,7 @@ class DefinitionView extends ComponentView<DefinitionProps> {
 }
 
 export class Note extends Component {
-    static TYPE = "note";
+    static TYPE = ComponentTypes.Note;
     body: Component[];
     private readonly title: string;
 
