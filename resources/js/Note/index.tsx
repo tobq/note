@@ -1,6 +1,7 @@
 import * as React from "react";
 import "./Style.scss"
 import cursorPosition from "../util/cursorPosition";
+import {SerialisedComponent, SerialisedDefinition, SerialisedNote, SerialisedPoint} from "./Serial";
 
 type RefView = { ref: React.RefObject<ComponentView>, view: JSX.Element };
 
@@ -12,6 +13,7 @@ abstract class Component {
     protected get key(): string {
         return null; //JSON.stringify(this.value);
     }
+    abstract get value(): SerialisedComponent;
 
     abstract getElement(add: addCallback, remove: removeCallback): RefView;
 }
@@ -37,7 +39,6 @@ export enum ComponentTypes {
 }
 
 export class Definition extends Component {
-    static TYPE = ComponentTypes.Definition;
     readonly title: string;
 
     constructor(title: string, body: string) {
@@ -46,9 +47,8 @@ export class Definition extends Component {
         this.body = body;
     }
 
-    get value() {
+    get value(): SerialisedDefinition {
         return {
-            type: Definition.TYPE,
             title: this.title,
             body: this.body
         };
@@ -75,7 +75,6 @@ interface DefinitionProps extends ViewProps {
 }
 
 export class Point extends Component {
-    static TYPE = ComponentTypes.Point;
     readonly body: string;
 
 
@@ -84,9 +83,8 @@ export class Point extends Component {
         this.body = body;
     }
 
-    get value(): { type: string; body: string } {
+    get value(): SerialisedPoint {
         return {
-            type: Point.TYPE,
             body: this.body
         };
     }
@@ -240,7 +238,6 @@ class DefinitionView extends ComponentView<DefinitionProps> {
 }
 
 export class Note extends Component {
-    static TYPE = ComponentTypes.Note;
     body: Component[];
     private readonly title: string;
 
@@ -253,9 +250,8 @@ export class Note extends Component {
         this.body = children;
     }
 
-    get value() {
+    get value(): SerialisedNote {
         return {
-            type: Note.TYPE,
             title: this.title,
             body: this.body.map(child => child.value)
         }
