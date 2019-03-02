@@ -5,7 +5,7 @@ import {SerialisedComponent, SerialisedDefinition, SerialisedNote, SerialisedPoi
 
 type RefView = { ref: React.RefObject<ComponentView>, view: JSX.Element };
 
-abstract class Component {
+export abstract class Component {
     body: any;
 
     abstract get value(): any;
