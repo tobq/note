@@ -32,12 +32,6 @@ export abstract class ComponentView<T extends ViewProps = ViewProps, S = {}> ext
     abstract focus(): void
 }
 
-export enum ComponentTypes {
-    Definition = "definition",
-    Point = "point",
-    Note = "note"
-}
-
 export class Definition extends Component {
     readonly title: string;
 
