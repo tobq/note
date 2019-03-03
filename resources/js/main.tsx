@@ -50,18 +50,27 @@ window.addEventListener("keydown", e => {
     }
 });
 
+const titleElement = <span className="title-node-content">Tobi</span>;
+
+function clearTitle() {
+    ReactDOM.render(titleElement, title);
+}
+
 function getTitles() {
     const view = getView();
     if (view.inView()) {
         nav.classList.add(NAV_STICK_CLASSNAME);
-        const titles = view.buildTitles();
-        console.log(titles.join(" > "));
-        title.innerText = titles.map(title=><div></div>);
+        const viewTree = view.buildViewTree();
+        console.log(viewTree.map(note => note.getTitle()).join(" > "));
+
+        const nodes = viewTree.map(note => note.renderNode());
+        ReactDOM.render([titleElement, ...nodes], title);
     } else {
         nav.classList.remove(NAV_STICK_CLASSNAME);
-        title.innerText = "Tobi"
+        clearTitle();
     }
 }
 
+clearTitle();
 getTitles();
 document.addEventListener("scroll", getTitles);
