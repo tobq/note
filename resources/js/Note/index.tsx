@@ -6,9 +6,10 @@ import {SerialisedComponent, SerialisedDefinition, SerialisedNote, SerialisedPoi
 type RefView = { ref: React.RefObject<ComponentView>, view: JSX.Element };
 
 export abstract class Component {
+    private static instantiations = 0;
     public body: any;
     // }
-    protected readonly key = Math.random();
+    protected readonly key = Component.instantiations++;
 
     // protected get key(): string {
     //     return null; //JSON.stringify(this.value);
