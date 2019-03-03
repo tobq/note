@@ -34,13 +34,13 @@ const defaultConfig: SerialisedNote = {
         {type: SerialTypes.Point, body: "Another Point"},
     ]
 };
-const note: Note = parseJSON(defaultConfig) as Note;
-const noteRedView = note.getRefView(null, null);
+const rootNote: Note = parseJSON(defaultConfig) as Note;
+const rootNoteRefView = rootNote.getRefView(null, null, null);
 
-ReactDOM.render(noteRedView.view, bodyContent);
+ReactDOM.render(rootNoteRefView.view, bodyContent);
 
 function getView(): NoteView {
-    return noteRedView.ref.current;
+    return rootNoteRefView.ref.current;
 }
 
 window.addEventListener("keydown", e => {
