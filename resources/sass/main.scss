@@ -1,4 +1,7 @@
 @import "fonts.css";
+@import "../js/Note/variables";
+
+$active-animation-duration: 200ms;
 
 body {
   font-family: roboto, Arial, serif;
