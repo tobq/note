@@ -1,8 +1,9 @@
 import "../sass/main.scss";
 import parseJSON from "./util/parseJSON";
 import * as ReactDOM from "react-dom";
-import {SerialisedNote} from "./Note/Serial";
+import {SerialisedNote, SerialTypes} from "./Note/Serial";
 import {Note, NoteView} from "./Note";
+import * as React from "react";
 
 const nav = document.querySelector("nav");
 const header = document.querySelector("header");
@@ -12,25 +13,25 @@ const NAV_STICK_CLASSNAME = "active";
 const bodyContent = document.getElementById("body-content");
 
 const defaultConfig: SerialisedNote = {
-    type: "note",
+    type: SerialTypes.Note,
     title: "TOP",
     body: [
         {
-            type: "note",
+            type: SerialTypes.Note,
             title: "Section",
             body: [
-                {type: "point", body: "First Point"},
-                {type: "point", body: "Second Point"},
-                {type: "point", body: "Another Point"},
+                {type: SerialTypes.Point, body: "First Point"},
+                {type: SerialTypes.Point, body: "Second Point"},
+                {type: SerialTypes.Point, body: "Another Point"},
             ]
         }, {
-            type: "definition",
+            type: SerialTypes.Definition,
             title: "definition",
             body: "An example of a definition, placed in a sub-note, as a child"
         },
-        {type: "point", body: "First Point"},
-        {type: "point", body: "Second Point"},
-        {type: "point", body: "Another Point"},
+        {type: SerialTypes.Point, body: "First Point"},
+        {type: SerialTypes.Point, body: "Second Point"},
+        {type: SerialTypes.Point, body: "Another Point"},
     ]
 };
 const note: Note = parseJSON(defaultConfig) as Note;
