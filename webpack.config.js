@@ -2,7 +2,7 @@ const path = require("path");
 
 const config = {
     entry: {
-        main: ["./resources/js/main.ts", "./resources/js/user.js"],
+        main: ["./resources/js/main.tsx", "./resources/js/user.js"],
         user: "./resources/js/user.js"
     },
     output: {
