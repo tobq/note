@@ -1,13 +1,18 @@
-import {Component, Definition} from "../Note";
-import {SerialisedComponent, SerialTypes} from "../Note/Serial";
+import {Component, Definition, Ref} from "../Note";
+import * as React from "react";
+import {SerialisedComponent} from "../Note/Serial";
 
-export default function parseJSON(json: SerialisedComponent): Component {
+export default function parseJSON(json: SerialisedComponent): Ref<Component> {
     switch (json.type) {
-        case SerialTypes.Point:
-            return new Point(json.body);
-        case SerialTypes.NotePoint:
-            return new NotePoint(json.title, json.body.map(parseJSON));
-        case SerialTypes.Definition:
-            return new Definition(json.title, json.body);
+        // case SerialTypes.Point:
+        //     return new Point(json.body);
+        // case SerialTypes.NotePoint:
+        //     return new NotePoint(json.title, json.body.map(parseJSON));
+        case Definition.TYPE:
+            const ref = React.createRef<Definition>();
+            return {
+                ref: ref,
+                component: <Definition title={json.title} ref={ref}>{json.body}</Definition>
+            };
     }
 }

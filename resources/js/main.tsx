@@ -1,7 +1,7 @@
 import "../sass/main.scss";
 import parseJSON from "./util/parseJSON";
 import * as ReactDOM from "react-dom";
-import {SerialisedNotePoint, SerialTypes} from "./Note/Serial";
+import {SerialisedDefinition, SerialisedNotePoint, SerialTypes} from "./Note/Serial";
 import {NotePoint, NotePointView} from "./Note";
 import * as React from "react";
 
@@ -13,30 +13,36 @@ const NAV_STICK_CLASSNAME = "active";
 
 const bodyContent = document.getElementById("body-content");
 
-const defaultConfig: SerialisedNotePoint = {
-    type: SerialTypes.NotePoint,
-    title: "TOP",
-    body: [
-        {
-            type: SerialTypes.NotePoint,
-            title: "Section",
-            body: [
-                {type: SerialTypes.Point, body: "First Point"},
-                {type: SerialTypes.Point, body: "Second Point"},
-                {type: SerialTypes.Point, body: "Another Point"},
-            ]
-        }, {
-            type: SerialTypes.Definition,
-            title: "definition",
-            body: "An example of a definition, placed in a sub-note, as a child"
-        },
-        {type: SerialTypes.Point, body: "First Point"},
-        {type: SerialTypes.Point, body: "Second Point"},
-        {type: SerialTypes.Point, body: "Another Point"},
-    ]
+const defaultConfig: SerialisedDefinition = {
+    type: SerialTypes.Definition,
+    title: "definition",
+    body: "An example of a definition, placed in a sub-note, as a child"
 };
+
+// const defaultConfig: SerialisedNotePoint = {
+//     type: SerialTypes.NotePoint,
+//     title: "TOP",
+//     body: [
+//         {
+//             type: SerialTypes.NotePoint,
+//             title: "Section",
+//             body: [
+//                 {type: SerialTypes.Point, body: "First Point"},
+//                 {type: SerialTypes.Point, body: "Second Point"},
+//                 {type: SerialTypes.Point, body: "Another Point"},
+//             ]
+//         }, {
+//             type: SerialTypes.Definition,
+//             title: "definition",
+//             body: "An example of a definition, placed in a sub-note, as a child"
+//         },
+//         {type: SerialTypes.Point, body: "First Point"},
+//         {type: SerialTypes.Point, body: "Second Point"},
+//         {type: SerialTypes.Point, body: "Another Point"},
+//     ]
+// };
 const rootNote: NotePoint = parseJSON(defaultConfig) as NotePoint;
-const rootNoteRefView = rootNote.getView(null, null, null,null, null);
+const rootNoteRefView = rootNote.getView(null, null, null, null, null);
 
 ReactDOM.render(rootNoteRefView.view, bodyContent);
 
@@ -53,28 +59,28 @@ window.addEventListener("keydown", e => {
 
 const titleElement = <span className="title-node-content">Tobi</span>;
 
-function clearTitle() {
-    ReactDOM.render(titleElement, title);
-}
-
-function getTitles() {
-    const view = getView();
-    if (view.inView()) {
-        nav.classList.add(NAV_STICK_CLASSNAME);
-        const viewTree = view.buildViewTree();
-        console.log(viewTree.map(note => note.getTitle()).join(" > "));
-
-        const nodes = viewTree.map(note => note.renderNode());
-        ReactDOM.render([titleElement, ...nodes], title);
-    } else {
-        nav.classList.remove(NAV_STICK_CLASSNAME);
-        clearTitle();
-    }
-}
-
-clearTitle();
-getTitles();
-document.addEventListener("scroll", getTitles);
+// function clearTitle() {
+//     ReactDOM.render(titleElement, title);
+// }
+//
+// function getTitles() {
+//     const view = getView();
+//     if (view.inView()) {
+//         nav.classList.add(NAV_STICK_CLASSNAME);
+//         const viewTree = view.buildViewTree();
+//         console.log(viewTree.map(note => note.getTitle()).join(" > "));
+//
+//         const nodes = viewTree.map(note => note.renderNode());
+//         ReactDOM.render([titleElement, ...nodes], title);
+//     } else {
+//         nav.classList.remove(NAV_STICK_CLASSNAME);
+//         clearTitle();
+//     }
+// }
+//
+// clearTitle();
+// getTitles();
+// document.addEventListener("scroll", getTitles);
 
 // interface AppState {
 //

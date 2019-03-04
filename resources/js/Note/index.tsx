@@ -4,110 +4,118 @@ import {Serialised,} from "./Serial";
 
 const nav = document.querySelector("nav");
 
-type RefObject<T extends Component> = React.RefObject<ComponentView<T>>;
+// type RefObject<T extends Component> = React.RefObject<ComponentView<T>>;
+//
+export type Ref<T extends Component> = { ref: React.RefObject<T>, component: JSX.Element };
 
-type RefView<T extends Component> = { ref: RefObject<T>, view: JSX.Element };
-
-export abstract class Component {
+export abstract class Component<Props = any, State = any> extends React.Component<Props, State> {
     private static instantiations = 0;
-    public body: any;
-    protected abstract readonly View: new () => ComponentView<this>;
-    protected readonly key = Component.instantiations++;
-    protected abstract getView: <T extends ComponentView<this>>(
-        ref: RefObject<this>,
-        add: asyncBoundNewCallback,
-        remove: asyncBoundCallback,
-        next: asyncBoundCallback,
-        before: asyncBoundCallback,
-        replace: replaceCallback
-    ) => JSX.Element;
+    public readonly key = Component.instantiations++;
 
     abstract get value(): Serialised<this>;
 
-    getRefView<T extends ComponentView<this>>(
-        add: asyncBoundNewCallback,
-        remove: asyncBoundCallback,
-        next: asyncBoundCallback,
-        before: asyncBoundCallback,
-        replace: replaceCallback
-    ): RefView<this> {
-        const ref = React.createRef<T>();
-        return {
-            ref: ref,
-            view: this.getView(ref, add, remove, next, before, replace)
-        }
-    }
+    abstract focus(): void;
+
+    abstract render(): JSX.Element;
 }
 
-type asyncBoundNewCallback = (newComponent: Component) => Promise<void>;
-type asyncBoundCallback = () => Promise<void>;
-type boundCallback = () => void;
-type replaceCallback = (...newComponent: Component[]) => Promise<void>;
-
-export interface ViewProps {
+type contextType = {
     add: asyncBoundNewCallback
     remove: asyncBoundCallback
     next: boundCallback
     before: boundCallback
     replace: replaceCallback
-}
+};
+const CallbackContext = React.createContext<contextType>(null);
 
-export abstract class ComponentView<C extends Component, T = any, S = any> extends React.Component<T, S> {
-    abstract get value(): C
+type asyncBoundNewCallback = (newComponent: Component) => Promise<void>;
+type replaceCallback = (...newComponent: Component[]) => Promise<void>; // TODO: FIX ANY USAGE - generic
+type asyncBoundCallback = () => Promise<void>;
+type boundCallback = () => void;
 
-    abstract focus(): void
-}
+// export interface ViewProps {
+//     add: asyncBoundNewCallback
+//     remove: asyncBoundCallback
+//     next: boundCallback
+//     before: boundCallback
+//     replace: replaceCallback
+// }
 
-export class Definition extends Component {
+type DefinitionProps = { title: string, children: string };
+
+export class Definition extends Component<DefinitionProps, DefinitionProps> {
     public static readonly TYPE = "definition";
-    readonly title: string;
-    protected View: new() => ComponentView<this, { title: string, children: string }> = class {
-        get value() {
-            return new Definition("hi", "byte");
-        }
 
-        focus() {
-        }
-    };
-
-    constructor(title: string, body: string) {
-        super();
-        this.title = title;
-        this.body = body;
-    }
+    state = this.props;
+    title = React.createRef<HTMLDivElement>();
+    body = React.createRef<HTMLDivElement>();
 
     get value() {
         return {
             type: Definition.TYPE,
-            title: this.title,
-            body: this.body
+            title: this.state.title,
+            body: this.state.children
         };
     }
 
-    getView: <T extends ComponentView<this>>(
-        ref: RefObject<this>,
-        add: asyncBoundNewCallback,
-        remove: asyncBoundCallback,
-        next: asyncBoundCallback,
-        before: asyncBoundCallback,
-        replace: replaceCallback
-    ) => JSX.Element = (ref, add, remove, next, before, replace) => {
-        return <DefinitionView
-            key={this.key}
-            add={add}
-            remove={remove}
-            next={next}
-            before={before}
-            replace={replace}
-            ref={ref}
-            title={this.title}
-        >{this.body}</DefinitionView>
+    focus(): void {
+        this.title.current.focus();
     }
-}
 
-interface DefinitionProps extends ViewProps {
-    title: string,
-    children: string,
+    componentDidMount(): void {
+        this.body.current.focus()
+    }
+
+    onTitleKeyDown: React.KeyboardEventHandler = async e => {
+        if (e.keyCode === 8) {
+            if (this.getBody().length === 0) {
+                e.preventDefault();
+                // await this.props.context.remove();
+            }
+        } else if (e.keyCode === 13) {
+            e.preventDefault();
+            this.body.current.focus();
+        }
+    };
+
+    onBodyKeyDown: React.KeyboardEventHandler = async e => {
+        if (e.keyCode === 8) {
+            if (this.getBody().length === 0) {
+                e.preventDefault();
+                // await this.props.replace(new Point(this.value.title));
+            }
+        } else if (e.keyCode === 13) {
+            e.preventDefault();
+            // await add(new Point(""));
+        }
+    };
+
+    render() {
+        return <div className="definition">
+            <div
+                className="definition-title"
+                contentEditable suppressContentEditableWarning
+                tabIndex={0}
+                onKeyDown={this.onTitleKeyDown}
+                ref={this.title}
+            >{this.props.title}</div>
+            <div
+                className="definition-body"
+                contentEditable suppressContentEditableWarning
+                tabIndex={0}
+                onKeyDown={this.onBodyKeyDown}
+                ref={this.body}
+            >{this.props.children}</div>
+        </div>;
+    }
+
+    private getBody() {
+        return this.body.current.textContent;
+    }
+
+    private getTitle() {
+        return this.title.current.textContent;
+    }
 }
 
 //
@@ -131,7 +139,7 @@ interface DefinitionProps extends ViewProps {
 //         const ref = React.createRef<PointView>();
 //         return {
 //             ref: ref,
-//             view: <PointView
+//             component: <PointView
 //                 key={this.key}
 //                 add={add}
 //                 remove={remove}
@@ -342,7 +350,7 @@ interface DefinitionProps extends ViewProps {
 //         const ref = React.createRef<NotePointView>();
 //         return {
 //             ref: ref,
-//             view: <NoteDefinitionView
+//             component: <NoteDefinitionView
 //                 key={this.key}
 //                 add={add}
 //                 remove={remove}
@@ -492,9 +500,9 @@ interface DefinitionProps extends ViewProps {
 //         }
 //     }
 //
-//     awake: <T extends Component>(view: T) => RefView<T> = // TODO: INFER RETURN TYPE
-//         view => {
-//             const child = view.getRefView(async (newComponent: Component) => {
+//     awake: <T extends Component>(component: T) => RefView<T> = // TODO: INFER RETURN TYPE
+//         component => {
+//             const child = component.getRefView(async (newComponent: Component) => {
 //                 await this.insertAfter(newComponent, child.ref.current);
 //             }, async () => {
 //                 await this.remove(child.ref.current);
@@ -559,7 +567,7 @@ interface DefinitionProps extends ViewProps {
 //             <div className="note-body">
 //                 {this.renderTitle()}
 //                 <div className="note-children">
-//                     {this.state.children.map(rv => rv.view)}
+//                     {this.state.children.map(rv => rv.component)}
 //                 </div>
 //             </div>
 //         </div>
