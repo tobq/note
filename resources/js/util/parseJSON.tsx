@@ -1,4 +1,4 @@
-import {Component, Definition, NotePoint, Point} from "../Note";
+import {Component, Definition} from "../Note";
 import {SerialisedComponent, SerialTypes} from "../Note/Serial";
 
 export default function parseJSON(json: SerialisedComponent): Component {
