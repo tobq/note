@@ -15,63 +15,70 @@ header {
   padding: 0 20px;
 }
 
-#nav-con {
-  height: 40px;
-}
-
 nav {
-  position: relative;
-  height: 40px;
   display: flex;
-  align-items: center;
-  padding: 0 20px;
+  align-items: stretch;
+  padding-left: $border-size;
+  padding-right: $border-size;
   background: white;
-  margin-bottom: 20px;
-}
-
-nav.stick > #user-picture {
-  transform: scale(0);
-}
-
-nav.stick > #profile-arrow {
-  transform: rotate(0) scale(1);
-  opacity: 1;
-}
-
-#profile-arrow {
-  position: absolute;
-  left: 20px;
-  height: 30px;
-  width: 30px;
-  background-position: right center;
-  /*background-size: contain;*/
-  background-image: url(/icon/right.svg);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-
-  transform: rotate(-45deg) scale(0);
-  opacity: 0;
-}
-
-nav.stick {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   box-shadow: 0 2px 10px rgba(220, 220, 220, 0.9);
+
+  //&.active {
+  //  > #user-picture {
+  //    transform: scale(0);
+  //  }
+  //
+  //  > #profile-arrow {
+  //    transform: rotate(0) scale(1);
+  //    opacity: 1;
+  //  }
+  //}
 }
 
-#user-picture {
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  background: grey;
-  display: inline-block;
-  flex-shrink: 0;
-  flex-grow: 0;
-  transition: transform 0.3s ease;
+#title {
+  display: flex;
+  flex-grow: 1;
 }
 
-#user-name {
-  display: inline-block;
-  flex: 1;
+.title-node {
+  display: flex;
+  align-items: center;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    width: $border-size;
+    height: $border-size;
+    border-radius: 50%;
+    background-position: center;
+    background-size: contain;
+    background-image: url(/icon/right.svg);
+    //transition: transform $active-animation-duration ease, opacity $active-animation-duration ease;
+    //
+    //transform: rotate(-45deg) scale(0);
+    //opacity: 0;
+  }
 }
+
+
+.title-node-content {
+  @extend %extended-line-height;
+  padding-right: $border-spacing;
+  padding-left: $border-spacing;
+}
+
+//
+//#user-picture {
+//  height: 100%;
+//  width: 30px;
+//  border-radius: 50%;
+//  background: grey;
+//  display: inline-block;
+//  flex-shrink: 0;
+//  flex-grow: 0;
+//  transition: transform $active-animation-duration ease;
+//}

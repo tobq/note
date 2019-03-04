@@ -1,4 +1,4 @@
-$line-height: 30px;
+$line-height: 20px;
 $border-size: $line-height;
 $border-radius: 0; //$border-size / 2;
 $border-spacing: 6px;
@@ -25,10 +25,4 @@ $font-size: 16px;
   &:hover {
     background-color: $hover-colour;
   }
-}
-
-%node {
-  @extend %hover;
-  //@extend %ellipses;
-  padding: 1px 6px;
 }

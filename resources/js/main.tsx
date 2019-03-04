@@ -1,23 +1,24 @@
 import "../sass/main.scss";
 import parseJSON from "./util/parseJSON";
 import * as ReactDOM from "react-dom";
-import {SerialisedNote, SerialTypes} from "./Note/Serial";
-import {Note, NoteView} from "./Note";
+import {SerialisedNotePoint, SerialTypes} from "./Note/Serial";
+import {NotePoint, NotePointView} from "./Note";
 import * as React from "react";
 
+// const appContext = React.createContext<Context>(this.getContext());
+
 const nav = document.querySelector("nav");
-const header = document.querySelector("header");
 const title = document.getElementById("title");
 const NAV_STICK_CLASSNAME = "active";
 
 const bodyContent = document.getElementById("body-content");
 
-const defaultConfig: SerialisedNote = {
-    type: SerialTypes.Note,
+const defaultConfig: SerialisedNotePoint = {
+    type: SerialTypes.NotePoint,
     title: "TOP",
     body: [
         {
-            type: SerialTypes.Note,
+            type: SerialTypes.NotePoint,
             title: "Section",
             body: [
                 {type: SerialTypes.Point, body: "First Point"},
@@ -34,12 +35,12 @@ const defaultConfig: SerialisedNote = {
         {type: SerialTypes.Point, body: "Another Point"},
     ]
 };
-const rootNote: Note = parseJSON(defaultConfig) as Note;
-const rootNoteRefView = rootNote.getRefView(null, null, null);
+const rootNote: NotePoint = parseJSON(defaultConfig) as NotePoint;
+const rootNoteRefView = rootNote.getView(null, null, null,null, null);
 
 ReactDOM.render(rootNoteRefView.view, bodyContent);
 
-function getView(): NoteView {
+function getView(): NotePointView {
     return rootNoteRefView.ref.current;
 }
 
@@ -74,3 +75,27 @@ function getTitles() {
 clearTitle();
 getTitles();
 document.addEventListener("scroll", getTitles);
+
+// interface AppState {
+//
+// }
+//
+// interface Context {
+//     state: AppState
+//     setState: Function
+// }
+//
+// class Provider extends React.Component<AppState> {
+//     state = {};
+//
+//     private getContext(): Context {
+//         return {
+//             state: this.state,
+//             setState: this.setState,
+//         };
+//     }
+//
+//     render() {
+//         return <appContext.Provider value={this.getContext()}>{this.props.children}</appContext.Provider>
+//     }
+// }

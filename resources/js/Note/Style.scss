@@ -1,44 +1,19 @@
-$line-height: 20px;
-$border-size: $line-height;
-$border-radius: 0; //$border-size / 2;
-$border-spacing: 4px;
-$border-colour: rgba(black, 0.1);
-$hover-colour: rgba(black, 0.2);
-$font-size: 16px;
-
-%ellipses {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-%hover {
-  transition: background-color 0.2s ease;
-  background-color: $border-colour;
-
-  &:hover {
-    background-color: $hover-colour;
-  }
-}
-
-%node {
-  @extend %hover;
-  //@extend %ellipses;
-  padding: 1px 6px;
-}
+@import "variables";
 
 .note-title {
-  padding-top: $border-spacing;
-  padding-bottom: $border-spacing;
+  @extend %extended-line-height;
 }
 
-%node, .note-title {
+.definition-title, .note-title {
   font-family: rbold;
 }
 
 .definition-title {
-  @extend %node;
-  max-width: 50%;
+  $vertical-padding: 2px;
+  @extend %hover;
+  padding-top: $vertical-padding;
+  padding-bottom: $vertical-padding;
+  max-width: 30%;
 }
 
 .definition:hover > .definition-title {
@@ -55,9 +30,8 @@ $font-size: 16px;
   &:before {
     @extend %hover;
     content: "";
-    //height: 2px;
     background-color: $border-colour;
-    flex: 0 0 $border-size;
+    width: $border-size;
     text-align: center;
     border-radius: $border-radius;
   }
@@ -65,6 +39,10 @@ $font-size: 16px;
   &:hover:before {
     background-color: $hover-colour;
   }
+}
+
+.note:before {
+  width: $border-size + $border-spacing;
 }
 
 .definition-body, .point-body, .note-body {
@@ -81,8 +59,11 @@ $font-size: 16px;
   }
 }
 
-.definition-body, .point-body, .note-title {
+.definition-body, .definition-title, .point-body, .note-title {
   padding-left: $border-spacing;
+  padding-right: $border-spacing;
+  overflow-wrap: break-word ;
+  hyphens: auto;
 }
 
 //

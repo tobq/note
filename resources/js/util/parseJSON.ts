@@ -1,13 +1,13 @@
-import {Component, Definition, Note, Point} from "../Note";
-import {SerialisedComponent} from "../Note/Serial";
+import {Component, Definition, NotePoint, Point} from "../Note";
+import {SerialisedComponent, SerialTypes} from "../Note/Serial";
 
 export default function parseJSON(json: SerialisedComponent): Component {
     switch (json.type) {
-        case "point":
+        case SerialTypes.Point:
             return new Point(json.body);
-        case "note":
-            return new Note(json.title, json.body.map(parseJSON));
-        case "definition":
+        case SerialTypes.NotePoint:
+            return new NotePoint(json.title, json.body.map(parseJSON));
+        case SerialTypes.Definition:
             return new Definition(json.title, json.body);
     }
 }
